@@ -6,7 +6,7 @@ class DishBuilder extends Component {
     render () {
         return (
             <Aux>
-                <div>Dish</div>
+                <div>Dish1</div>
                 <div>Build Controls</div>
             </Aux>
         );
