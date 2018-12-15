@@ -8,9 +8,6 @@ class DishIngredient extends Component {
         let ingredient = null;
 
         switch (this.props.type) {
-            case ('bread-bottom'):
-                ingredient = <div className="BreadBottom"></div>;
-                break;
             case ('bread-top'):
                 ingredient = (
                     <div className="BreadTop">
@@ -18,6 +15,9 @@ class DishIngredient extends Component {
                         <div className="Seeds2"></div>
                     </div>
                 )
+                break;
+            case ('bread-bottom'):
+                ingredient = <div className="BreadBottom"></div>;
                 break;
             case ('meat'):
                 ingredient = <div className="Meat"></div>;
@@ -39,5 +39,9 @@ class DishIngredient extends Component {
     }
 }
 
+
+DishIngredient.propTypes = {
+    type: PropTypes.string.isRequired
+}
 
 export default DishIngredient;

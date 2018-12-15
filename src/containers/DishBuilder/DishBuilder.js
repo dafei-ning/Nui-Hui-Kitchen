@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import Aux from '../../hoc/Aux'
 
+import Aux from '../../hoc/Aux'
+import Dish from '../../components/Dish/Dish';
 
 class DishBuilder extends Component {
     render () {
         return (
             <Aux>
-                <div>Dish1</div>
+                <Dish />
                 <div>Build Controls</div>
             </Aux>
         );
