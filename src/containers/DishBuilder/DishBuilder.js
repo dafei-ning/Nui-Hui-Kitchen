@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import Aux from '../../hoc/Aux'
 import Dish from '../../components/Dish/Dish';
@@ -60,12 +60,12 @@ class DishBuilder extends Component {
         })
     }
 
-    render () {
+    render() {
         return (
             <Aux>
-                <Dish ingredients={this.state.ingredients}/>
-                <BuildControls 
-                    ingredientAdded={this.addIngredientHandler}/>
+                <Dish ingredients={this.state.ingredients} />
+                <BuildControls
+                    ingredientAdded={this.addIngredientHandler} />
             </Aux>
         );
     }
