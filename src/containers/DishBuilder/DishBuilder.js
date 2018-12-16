@@ -51,9 +51,9 @@ class DishBuilder extends Component {
             ...this.state.ingredients
         };
         updateIngredients[type] = updateCounted;
-        const priceAddition = INGREDIENT_PRICES[type];
+        const priceDeduction = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceAddition;
+        const newPrice = oldPrice - priceDeduction;
         this.setState({
             totalPrice: newPrice,
             ingredients: updateIngredients
@@ -65,7 +65,8 @@ class DishBuilder extends Component {
             <Aux>
                 <Dish ingredients={this.state.ingredients} />
                 <BuildControls
-                    ingredientAdded={this.addIngredientHandler} />
+                    ingredientAdded={this.addIngredientHandler}
+                    ingredientRemoved={this.removeIngredientHandler} />
             </Aux>
         );
     }
