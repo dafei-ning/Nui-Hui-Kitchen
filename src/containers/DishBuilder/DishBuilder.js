@@ -75,8 +75,10 @@ class DishBuilder extends Component {
                 <Dish ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
-                    ingredientRemoved={this.removeIngredientHandler} 
-                    disabledArray={disabledInfo}/>
+                    ingredientRemoved={this.removeIngredientHandler}
+                    disabledArray={disabledInfo}
+                    price={this.state.totalPrice}
+                />
             </Aux>
         );
     }
