@@ -25,7 +25,19 @@ class DishBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        totalPrice: 5
+        totalPrice: 5,
+        purchasable: false
+    }
+
+    updatePurchaseState = (ingredients) => {
+        const sum = Object.keys(ingredients)
+            .map(igKey => {
+                return ingredients[igKey];
+            })
+            .reduce((sums, el) => {
+                return sums + el;
+            }, 0);
+        this.setState({ purchasable: sum > 0 })
     }
 
     addIngredientHandler = (type) => {
@@ -42,6 +54,7 @@ class DishBuilder extends Component {
             totalPrice: newPrice,
             ingredients: updateIngredients
         })
+        this.updatePurchaseState(updateIngredients);
     }
 
     removeIngredientHandler = (type) => {
@@ -61,6 +74,7 @@ class DishBuilder extends Component {
             totalPrice: newPrice,
             ingredients: updateIngredients
         })
+        this.updatePurchaseState(updateIngredients);
     }
 
     render() {
@@ -77,6 +91,7 @@ class DishBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
                     disabledArray={disabledInfo}
+                    purchasable={this.state.purchasable}
                     price={this.state.totalPrice}
                 />
             </Aux>
