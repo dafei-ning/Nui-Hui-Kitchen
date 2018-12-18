@@ -82,7 +82,11 @@ class DishBuilder extends Component {
     }
 
     purchaseHandler = () => {
-        this.setState({purchasing: true});
+        this.setState({ purchasing: true });
+    }
+
+    purchaseCancelHandler = () => {
+        this.setState({ purchasing: false });
     }
 
     render() {
@@ -94,7 +98,7 @@ class DishBuilder extends Component {
         }
         return (
             <Aux>
-                <Model show={this.state.purchasing}>
+                <Model show={this.state.purchasing} modelClosed={this.purchaseCancelHandler}>
                     <OrderSummary ingredients={this.state.ingredients} />
                 </Model>
                 <Dish ingredients={this.state.ingredients} />
