@@ -89,6 +89,10 @@ class DishBuilder extends Component {
         this.setState({ purchasing: false });
     }
 
+    purchaseContinueHandler = () => {
+        alert('You Continue!');
+    }
+
     render() {
         const disabledInfo = {
             ...this.state.ingredients
@@ -99,7 +103,11 @@ class DishBuilder extends Component {
         return (
             <Aux>
                 <Model show={this.state.purchasing} modelClosed={this.purchaseCancelHandler}>
-                    <OrderSummary ingredients={this.state.ingredients} />
+                    <OrderSummary 
+                        ingredients={this.state.ingredients} 
+                        purchaseCanceled={this.purchaseCancelHandler}
+                        purchaseContinued={this.purchaseContinueHandler}
+                    />
                 </Model>
                 <Dish ingredients={this.state.ingredients} />
                 <BuildControls
