@@ -29,7 +29,8 @@ class DishBuilder extends Component {
             meat: 0
         },
         totalPrice: 5,
-        purchasable: false
+        purchasable: false,
+        purchasing: false
     }
 
     updatePurchaseState = (ingredients) => {
@@ -80,6 +81,10 @@ class DishBuilder extends Component {
         this.updatePurchaseState(updateIngredients);
     }
 
+    purchaseHandler = () => {
+        this.setState({purchasing: true});
+    }
+
     render() {
         const disabledInfo = {
             ...this.state.ingredients
@@ -89,7 +94,7 @@ class DishBuilder extends Component {
         }
         return (
             <Aux>
-                <Model>
+                <Model show={this.state.purchasing}>
                     <OrderSummary ingredients={this.state.ingredients} />
                 </Model>
                 <Dish ingredients={this.state.ingredients} />
@@ -98,6 +103,7 @@ class DishBuilder extends Component {
                     ingredientRemoved={this.removeIngredientHandler}
                     disabledArray={disabledInfo}
                     purchasable={this.state.purchasable}
+                    ordered={this.purchaseHandler}
                     price={this.state.totalPrice}
                 />
             </Aux>
