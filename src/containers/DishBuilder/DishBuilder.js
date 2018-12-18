@@ -4,6 +4,8 @@ import Aux from '../../hoc/Aux'
 import Dish from '../../components/Dish/Dish';
 import BuildControls from '../../components/Dish/BuildControls/BuildControls';
 
+import Model from '../../components/UI/Model/Model'; 
+
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -86,6 +88,7 @@ class DishBuilder extends Component {
         }
         return (
             <Aux>
+                <Modal />
                 <Dish ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
