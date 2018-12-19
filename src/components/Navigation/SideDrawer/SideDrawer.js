@@ -8,10 +8,14 @@ import Aux from '../../../hoc/Aux';
 
 const sideDrawer = (props) => {
 
+    let attachedClasses = ['SideDrawer', 'Close'];
+    if (props.open) {
+        attachedClasses = ['SideDrawer', 'Open'];
+    }
     return (
         <Aux>
-        <Backdrop show/>
-        <div className="SideDrawer">
+        <Backdrop show={props.open} clicked={props.closed}/>
+        <div className={attachedClasses.join(' ')}>
             <div className="LogoInSideDrawer">
                 <Logo />
             </div>
