@@ -157,4 +157,4 @@ class DishBuilder extends Component {
     }
 }
 
-export default withErrorHandler(DishBuilder);
+export default withErrorHandler(DishBuilder, axios);
