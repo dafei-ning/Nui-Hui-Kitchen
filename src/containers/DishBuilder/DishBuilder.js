@@ -5,7 +5,9 @@ import Dish from '../../components/Dish/Dish';
 import BuildControls from '../../components/Dish/BuildControls/BuildControls';
 
 import Model from '../../components/UI/Model/Model';
-import OrderSummary from '../../components/Dish/OrderSummary/OrderSummary'
+import OrderSummary from '../../components/Dish/OrderSummary/OrderSummary';
+
+import axios from '../../axios-orders';
 
 
 const INGREDIENT_PRICES = {
@@ -90,7 +92,24 @@ class DishBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        alert('You Continue!');
+        //alert('You Continue!');
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: 'Zhang san',
+                address: {
+                    street: 'N 1st st',
+                    zipCode: '95100',
+                    Country: 'USA',
+                },
+                email: 'zhang@gmail.com'
+            },
+            deliveryMethod: '1-hour shipping',
+        }
+        axios.post('/orders.json', order)
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
     }
 
     render() {
@@ -103,9 +122,9 @@ class DishBuilder extends Component {
         return (
             <Aux>
                 <Model show={this.state.purchasing} modelClosed={this.purchaseCancelHandler}>
-                    <OrderSummary 
+                    <OrderSummary
                         price={this.state.totalPrice}
-                        ingredients={this.state.ingredients} 
+                        ingredients={this.state.ingredients}
                         purchaseCanceled={this.purchaseCancelHandler}
                         purchaseContinued={this.purchaseContinueHandler}
                     />
