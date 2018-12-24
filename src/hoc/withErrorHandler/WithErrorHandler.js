@@ -9,7 +9,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null,
         }
 
-        componentDidMount() {
+        componentWillMount () {
             axios.interceptors.request.use(req => {
                 this.setState({error: null});
                 return req; // 当send一个request，必须return这个request让它continue

@@ -37,13 +37,17 @@ class DishBuilder extends Component {
         totalPrice: 5,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
     }
 
     componentDidMount() {
         axios.get('https://kitchen-0723.firebaseio.com/ingredients.json')
             .then(response => {
                 this.setState({ ingredients: response.data });
+            })
+            .catch(error => {
+                this.setState({error: true});
             })
     }
 
@@ -138,7 +142,7 @@ class DishBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
-        let dish = <Spinner />
+        let dish = this.state.error ? <p>Ingredients loading error</p> : <Spinner />
         if (this.state.ingredients) {
             dish = (
                 <Aux>
