@@ -27,16 +27,24 @@ class DishBuilder extends Component {
     //     this.state = {...}
     // }
     state = {
-        ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingredients: null,
+        // {
+        //     salad: 0,
+        //     bacon: 0,
+        //     cheese: 0,
+        //     meat: 0
+        // },
         totalPrice: 5,
         purchasable: false,
         purchasing: false,
         loading: false
+    }
+
+    componentDidMount() {
+        axios.get('https://kitchen-0723.firebaseio.com/ingredients.json')
+            .then(response => {
+                this.setState({ ingredients: response.data });
+            })
     }
 
     updatePurchaseState = (ingredients) => {
@@ -129,29 +137,40 @@ class DishBuilder extends Component {
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
-        let orderSummary = <OrderSummary
-            price={this.state.totalPrice}
-            ingredients={this.state.ingredients}
-            purchaseCanceled={this.purchaseCancelHandler}
-            purchaseContinued={this.purchaseContinueHandler}
-        />;
+        let orderSummary = null;
+
         if (this.state.loading) {
             orderSummary = <Spinner />
+        }
+
+        let dish = <Spinner />
+        if (this.state.ingredients) {
+            dish = (
+                <Aux>
+                    <Dish ingredients={this.state.ingredients} />
+                    <BuildControls
+                        ingredientAdded={this.addIngredientHandler}
+                        ingredientRemoved={this.removeIngredientHandler}
+                        disabledArray={disabledInfo}
+                        purchasable={this.state.purchasable}
+                        ordered={this.purchaseHandler}
+                        price={this.state.totalPrice}
+                    />
+                </Aux>
+            );
+            orderSummary = <OrderSummary
+                price={this.state.totalPrice}
+                ingredients={this.state.ingredients}
+                purchaseCanceled={this.purchaseCancelHandler}
+                purchaseContinued={this.purchaseContinueHandler}
+            />;
         }
         return (
             <Aux>
                 <Model show={this.state.purchasing} modelClosed={this.purchaseCancelHandler}>
                     {orderSummary}
                 </Model>
-                <Dish ingredients={this.state.ingredients} />
-                <BuildControls
-                    ingredientAdded={this.addIngredientHandler}
-                    ingredientRemoved={this.removeIngredientHandler}
-                    disabledArray={disabledInfo}
-                    purchasable={this.state.purchasable}
-                    ordered={this.purchaseHandler}
-                    price={this.state.totalPrice}
-                />
+                {dish}
             </Aux>
         );
     }
