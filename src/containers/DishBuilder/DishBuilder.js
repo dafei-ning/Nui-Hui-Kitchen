@@ -138,11 +138,6 @@ class DishBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
-
-        if (this.state.loading) {
-            orderSummary = <Spinner />
-        }
-
         let dish = <Spinner />
         if (this.state.ingredients) {
             dish = (
@@ -164,6 +159,9 @@ class DishBuilder extends Component {
                 purchaseCanceled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler}
             />;
+        }
+        if (this.state.loading) {
+            orderSummary = <Spinner />
         }
         return (
             <Aux>
